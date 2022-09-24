@@ -29,27 +29,35 @@ def trapz(x, m):
     return -s1/2
 
 
-"""def simpson(x):
-    xi = a
-    xi_1 = xi + d
-    xi_2 = xi_1 + d
-    s1 = d / 3 * (f(xi, x) + 4 * f(xi_1, x) + f(xi_2, x))
+def simpson(x, m):
+    ti = a
+    ti_1 = ti + d
+    ti_2 = ti_1 + d
+    s1 = d / 3 * (f(ti, x, m) + 4 * f(ti_1, x, m) + f(ti_2, x, m))
     for i in range(0, n - 1):
-        xi = xi_1
-        xi_1 = xi + d
-        xi_2 = xi_1 + d
+        ti = ti_1
+        ti_1 = ti + d
+        ti_2 = ti_1 + d
         s = s1
-        s1 = s + d / 3 * (f(xi, x) + 4 * f(xi_1, x) + f(xi_2, x))
+        s1 = s + d / 3 * (f(ti, x, m) + 4 * f(ti_1, x, m) + f(ti_2, x, m))
     print('Simpson result', -s1 / 2)
-"""
+    return -s1/2
 
 
-def bessel_derivative(g):
+def bessel_trapz():
     dx = 0.1
     for x in range(0, 100):
         g = (trapz(x + dx, 0) - trapz(x - dx, 0)) / 2 / dx
-        print(g)
-    return g
+        g1 = trapz(x, 1)
+        print(g+g1)
+    return 0
 
 
-bessel_derivative(g)
+def bessel_simpson():
+    dx = 0.1
+    for x in range (0, 100):
+        g = (simpson(x + dx, 0) - simpson(x - dx, 0)) / 2 / dx
+        g1 = simpson(x, 1)
+    return 0
+
+bessel_trapz()
