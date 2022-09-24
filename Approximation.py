@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def f_1(t, x):
-    return 1 / np.pi * (np.cos(t - x * np.sin(t)))
+def f(t, x, m):
+    return 1 / np.pi * (np.cos(m*t - x * np.sin(t)))
 
 
 # Parameters
@@ -16,16 +16,17 @@ n = 100
 d = (b - a) / n
 
 
-def trapz(f, x):
-    xi = a
-    xi_1 = xi + d
-    s1 = (f(xi_1, x) + f(xi, x)) * d
+def trapz(x, m):
+    ti = a
+    ti_1 = ti + d
+    s1 = (f(ti_1, x, m) + f(ti, x, m)) * d
     for i in range(0, n - 1):
-        xi = xi_1
-        xi_1 = xi + d
+        ti = ti_1
+        ti_1 = ti + d
         s = s1
-        s1 = s + (f(xi_1, x) + f(xi, x)) * d
+        s1 = s + (f(ti_1, x, m) + f(ti, x, m)) * d
     print('Trapz result', -s1 / 2)
+    return -s1/2
 
 
 """def simpson(x):
@@ -42,4 +43,13 @@ def trapz(f, x):
     print('Simpson result', -s1 / 2)
 """
 
-print('hello world')
+
+def bessel_derivative(g):
+    dx = 0.1
+    for x in range(0, 100):
+        g = (trapz(x + dx, 0) - trapz(x - dx, 0)) / 2 / dx
+        print(g)
+    return g
+
+
+bessel_derivative(g)
